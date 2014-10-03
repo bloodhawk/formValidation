@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('devSocial', ['ngRoute']);
+var app = angular.module('devSocial', ['ngRoute', 'checkInputs']);
 
 app.config(['$routeProvider', function($routeProvider){
 

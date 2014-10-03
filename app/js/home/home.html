@@ -2,22 +2,90 @@
 	<div class='login-signup-menu'>
 		<ul>
 			<!-- Links for toggeling login and signup forms -->
-			<li>Login</li>
-			<li>Signup</li>
+			<li ng-click="toggleLogin()">Login</li>
+			<li ng-click="toggleSignup()">Signup</li>
 		</ul>
 	</div>
 	<div class='forms-container'>
 		
 		<!-- Login Form -->
-		<div class='login-signup-form' ng-controller='loginCtrl'>
-			<!-- LOGIN FORM CODE GOES HERE -->
+		<div ng-show="login" class='login-signup-form' ng-controller='loginCtrl'>
+		    <form class="form-horizontal" role="form" name="lForm">
+			  <div class="form-group">
+			    <label for="l-username" class="col-sm-2 control-label">Username:</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" ng-model="user.username" id="l-username" name="lUsername" placeholder="Username" required>
+			      <p ng-if="lForm.lUsername.$error.required && !lForm.lPassword.$pristine" class="help-block">Username required</p>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="l-password" class="col-sm-2 control-label">Password:</label>
+			    <div class="col-sm-10">
+			      <input type="password" class="form-control" id="l-password" name="lPassword" ng-model="user.password" required minlength="8" placeholder="Password">
+			      <p ng-if="lForm.lPassword.$error.required && !lForm.lPassword.$pristine" class="help-block">Password required</p>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <button ng-click="authUser()" ng-disabled="lForm.$invalid" type="submit" class="btn btn-success">Sign in</button>
+			    </div>
+			  </div>
+			</form>
+			<div ng-if="loggedIn === false" class="alert alert-danger">
+    			<strong>Failure!</strong> {{message}}
+			</div>
+			<div ng-if="loggedIn === true" class="alert alert-success">
+    			<strong>Success!</strong> {{message}}
+			</div>
 		</div>
 
 		<!-- Signup Form -->
-		<div class='login-signup-form' ng-controller='signupCtrl'>
-		<!-- SIGNUP FORM CODE GOES HERE -->
+		<div ng-show="signup" class='login-signup-form' ng-controller='signupCtrl'>
+			<form class="s-form form-horizontal" role="form" name="sForm">
+				<div class="form-group">
+					<label for="s-username" class="control-label col-sm-2">Username:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="s-username" name="sUsername" ng-model="sUsername" required>
+						<p ng-if="sForm.sUsername.$error.required && !sForm.sUsername.$pristine" class="help-block">Username is required</p>
+					</div>
+				</div>
+				<div class="form-group has-feedback">
+					<label for="s-password" class="control-label col-sm-2">Password:</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" id="s-password" name="sPassword" ng-model="sPassword" required>
+						<span ng-if="pCheck" class="glyphicon glyphicon-ok form-control-feedback green"></span>
+						<p ng-if="sForm.sPassword.$error.required && !sForm.sPassword.$pristine" class="help-block">Password is required</p>
+					</div>
+				</div>
+				<div class="form-group has-feedback">
+					<label  for="s-pwcheck" class="control-label col-sm-2">Password Confirm:</label>
+					<div class="col-sm-10">
+						<input check-inputs input-first="sPassword" input-second="sPwcheck" truth-model="pCheck" type="password" class="form-control" id="s-pwcheck" name="sPwcheck" ng-model="sPwcheck" required>
+						<span ng-if="pCheck" class="glyphicon glyphicon-ok form-control-feedback green"></span>
+						<p ng-if="sForm.sPwcheck.$error.required && !sForm.sPwcheck.$pristine" class="help-block">Password confirmation is required</p>
+						<p ng-if="pCheck" class="help-block">Passwords match</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="s-email" class="control-label col-sm-3">Email:</label>
+					<div class="col-sm-9">
+						<input type="email" id="s-email" name="sEmail" ng-model="sEmail" required>
+						<p ng-if="sForm.sEmail.$error.required && !sForm.sEmail.$pristine" class="help-block">Email is required</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="s-emailconfirm" class="control-label col-sm-3">Email Confirm:</label>
+					<div class="col-sm-9">
+						<input name="sEmailConfirm" ng-model="sEmailConfirm" type="email" id="s-emailconfirm" required>
+						<p ng-if="sForm.sEmailConfirm.$error.required && !sForm.sEmailConfirm.$pristine" class="help-block">Confirmation of email is required</p>
+					</div>
+				</div>
+				<div class="form-group">
+			    <div class="col-sm-offset-4 col-sm-8">
+			      <button ng-disabled="sForm.$invalid" type="submit" class="btn btn-success">Sign Up</button>
+			    </div>
+			  </div>
+			</form>
 		</div>
-
-		
 	</div>
 </div>

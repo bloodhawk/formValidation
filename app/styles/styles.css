@@ -58,6 +58,12 @@ body {
   font-size: 1.4rem; /* =14px */
   font-family: Arial,sans-serif;
   line-height: 20px;
+  	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .clear {
@@ -109,7 +115,7 @@ body {
 /* home styles */
 
 .login-signup-wrapper {
-	width: 400px;
+	width: 500px;
 	margin: 100px auto 0 auto;
 }
 
@@ -124,4 +130,17 @@ body {
 			cursor: pointer;
 		}
 
-	
+		.login-signup-form {
+			margin-top: 50px;
+		}
+		
+input.ng-dirty {
+	border: 2px solid yellow;
+}
+input.ng-valid {
+	border: 2px solid green;
+}
+
+.green {
+	color: green;
+}
